@@ -1,0 +1,66 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "make Alphatronics BASIC v5.26 (sjasmplus)",
+            "type": "shell",
+            "command": "sjasmplus",
+            "args": [
+                "--fullpath",
+                "--nofakes",
+                "--sld=mb.sld",
+                "mb.asm"
+            ],
+            "problemMatcher": {
+                "owner": "sjasmplus",
+                "fileLocation": "autoDetect",
+                "pattern": {
+                    "regexp": "^(.*)\\((\\d+)\\):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "severity": 3,
+                    "message": 4
+                }
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+
+        {
+            "label": "Optimize BASIC v5.26 (MDL)",
+            "type": "shell",
+            "command": "/opt/java21/bin/java -jar ~/Soft/MDL/mdl.jar mb.asm -cpu z180 -po -dialect sjasmplus",
+            "problemMatcher": {
+                "applyTo": "allDocuments",
+                "fileLocation": [
+                    "autoDetect",
+                    "${workspaceFolder}"
+                ],
+                "pattern": [
+                    {
+                        "regexp": "^(\\w+): (.+) in (.+)#([0-9]+): (.+)$",
+                        "file": 3,
+                        "line": 4,
+                        "severity": 1,
+                        "message": 5,
+                        "code": 2
+                    }
+                ]
+            },
+            "presentation": {
+                "echo": false,
+                "focus": false,
+                "panel": "dedicated",
+                "showReuseMessage": false,
+                "clear": true,
+                "revealProblems": "onProblem"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        }
+    ]
+}

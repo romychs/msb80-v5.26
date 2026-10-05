@@ -1,0 +1,13 @@
+*.labels
+*.obj
+*.OBJ
+*.COM
+*.com
+*.bin
+*.tmp
+tmp/
+build/
+*.lst
+*.sld
+*.bak
+*.BAK
